@@ -14,7 +14,7 @@ fn main() {
 
     let output: PathBuf = std::env::var_os("OUTPUT").expect("Missing OUTPUT env var").into();
 
-    for i in std::fs::read_dir(articles_path).unwrap().map(|p| p.unwrap().path()).map(|p| (p.file_name().unwrap().to_str().unwrap().to_owned(), std::fs::read_to_string(p).unwrap())) {
+    for i in std::fs::read_dir(articles_path).unwrap().map(|p| p.unwrap().path()).map(|p| (p.file_stem().unwrap().to_str().unwrap().to_owned(), std::fs::read_to_string(p).unwrap())) {
         let (title, content) = i;
 
         let rendered = Article {
